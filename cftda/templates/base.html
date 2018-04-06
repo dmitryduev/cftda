@@ -1,0 +1,142 @@
+{% load static wagtailuserbar %}
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+        {% block title %}
+            {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+            {% with self.get_site.site_name as site_name %}
+                {% if site_name %}- {{ site_name }}{% endif %}
+            {% endwith %}
+        {% endblock %}
+    </title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {# Global stylesheets #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cftda.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
+    {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+{% wagtailuserbar %}
+
+{# navbar #}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-rocket"></i> Caltech Center for Time Domain Astronomy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbar" aria-controls="navbar"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav mr-auto">
+                {# Navbar items on the left #}
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item{% block nav_home %}{% endblock %}">
+                    <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{% block nav_people %}{% endblock %}" href="#">People</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{% block nav_projects %}{% endblock %}" href="#">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{% block nav_stories %}{% endblock %}" href="#">Stories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{% block nav_events %}{% endblock %}" href="#">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{% block nav_opportunities %}{% endblock %}" href="#">Opportunities</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block carousel %}
+    {# Override here to add carousel #}
+{% endblock %}
+
+{% block content %}
+    {# Override here to add content #}
+{% endblock %}
+
+{# footer #}
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <span class="text-muted mx-auto">
+                &copy; California Institute of Technology 2018
+            </span>
+        </div>
+{#        <div class="row">#}
+{#            <div class="col-6">#}
+{#                <h6>Contact</h6>#}
+{#                <p>#}
+{#                    California Institute of Technology#}
+{#                    Cahill Center for Astronomy and Astrophysics#}
+{#                    1216 E California Blvd, Pasadena, CA 91125#}
+{#                </p>#}
+{#            </div>#}
+{#            <div class="col-6">#}
+{#                <img class="card-img-top" data-src="holder.js/100px225" alt="Card image cap">#}
+{#            </div>#}
+{#            <hr class="clearfix w-100 d-md-none">#}
+{#            <div class="col">#}
+{#                <span class="text-muted mx-auto">#}
+{#                    &copy; California Institute of Technology 2018#}
+{#                </span>#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+</footer>
+
+{# Global javascript #}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+        integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/holder.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cftda.js' %}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        // init masonry grid
+        $('.grid').masonry({
+            // set itemSelector so .grid-sizer is not used in layout
+            itemSelector: '.grid-item',
+            // use element for option
+            columnWidth: '.grid-sizer',
+            percentPosition: true,
+            horizontalOrder: true,
+            gutter: 20
+        });
+    });
+</script>
+
+{% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+{% endblock %}
+</body>
+</html>
