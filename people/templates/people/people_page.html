@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-peoplepage{% endblock %}
+
+{% block content %}
+    <div class="container mt-0 pt-1 pb-5 mb-4">
+        <div class="row">
+            <div class="col">
+                <h2>{{ page.title }}</h2>
+                <p class="meta">{{ page.date }}</p>
+
+                <div class="intro">{{ page.intro }}</div>
+
+                {{ page.body|richtext }}
+
+                {% for item in page.gallery_images.all %}
+                    <div>
+                        {% image item.image fill-400x300 %}
+                        <p>{{ item.caption }}</p>
+                    </div>
+                {% endfor %}
+
+                <p><a href="{{ page.get_parent.url }}" class="a-gray">Return to people</a></p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

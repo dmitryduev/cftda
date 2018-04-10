@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-storiesindexpage{% endblock %}
+
+{% block content %}
+    <div class="container mt-0 pt-1 pb-5 mb-4">
+        <div class="row">
+            <div class="col">
+                <h1>{{ page.title }}</h1>
+
+                <div class="intro">{{ page.intro|richtext }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            {% for post in stories %}
+                <div class="col-6">
+                    {% with post=post.specific %}
+                        <h2><a href="{% pageurl post %}" class="a-gray">{{ post.title }}</a></h2>
+
+                        {% with post.main_image as main_image %}
+                            {% if main_image %}{% image main_image fill-240x150 %}{% endif %}
+                        {% endwith %}
+
+
+                        <p><br>{{ post.intro }}</p>
+                        {{ post.body|richtext }}
+
+                        {% if post.tags.all.count %}
+                            <div class="tags">
+                                tags:
+                                {% for tag in post.tags.all %}
+                                    <a href="{% slugurl 'stories-tags' %}?tag={{ tag }}">
+                                        <span class="badge badge-primary">{{ tag }}</span>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <!--pagination-->
+                <br>
+                <nav aria-label="Doc navigation">
+                    <ul class="pagination{# justify-content-end#}">
+                        {% if stories.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ stories.previous_page_number }}"
+                                   tabindex="-1">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% for page_num in stories.paginator.page_range %}
+                            <li class="page-item{% if page_num == stories.number %} active{% endif %}">
+                                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+                        {% endfor %}
+                        {% if stories.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ stories.next_page_number }}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
