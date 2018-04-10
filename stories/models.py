@@ -1,8 +1,9 @@
+from django import forms
 from django.db import models
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
@@ -11,6 +12,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 
 class StoriesIndexPage(Page):
@@ -24,7 +26,7 @@ class StoriesIndexPage(Page):
         # docpages = self.get_children().live().order_by('first_published_at')
         docpages = StoriesPage.objects.live().order_by('-date')
 
-        paginator = Paginator(docpages, 1)  # Show 9 resources per page
+        paginator = Paginator(docpages, 6)  # Show 9 resources per page
 
         page = request.GET.get('page')
         try:
@@ -56,6 +58,7 @@ class StoriesPage(Page):
     intro = models.CharField(max_length=300)
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=StoriesPageTag, blank=True)
+    categories = ParentalManyToManyField('stories.StoriesCategory', blank=True)
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -73,6 +76,7 @@ class StoriesPage(Page):
         MultiFieldPanel([
             FieldPanel('date'),
             FieldPanel('tags'),
+            FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading="Story info"),
         FieldPanel('intro'),
         FieldPanel('body'),
@@ -105,3 +109,23 @@ class StoriesTagIndexPage(Page):
         context = super().get_context(request)
         context['pages'] = pages
         return context
+
+
+@register_snippet
+class StoriesCategory(models.Model):
+    name = models.CharField(max_length=255)
+    icon = models.ForeignKey(
+        'wagtailimages.Image', null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        ImageChooserPanel('icon'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'story categories'
