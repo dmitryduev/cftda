@@ -101,7 +101,7 @@
     <div class="container-fluid blue-stripe-2">
         <div class="container">
             <div class="row pt-4 pb-5 mb-4">
-                <div class="col-lg-9">
+                <div class="col-lg-8">
                     <h3 class="a-blue">
                         Mission BS
                     </h3>
@@ -126,7 +126,7 @@
                     </p>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <h3>
                         <a href="#" class="a-blue">Events</a>
                     </h3>
@@ -135,7 +135,7 @@
                             <h5 class="card-title">ZTF Nobel Prize Lecture</h5>
                             <p class="card-text">Zete Eff will be giving the annual Nobel Prize Lecture.
                                 Come, join me on the divan.</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Details</a>
+                            <a href="#" class="btn btn-outline-primary btn-sm float-right">Details</a>
                         </div>
                     </div>
                 </div>
@@ -153,9 +153,9 @@
                 </h3>
                 <div class="grid">
                     <!-- width of .grid-sizer used for columnWidth -->
-                    <div class="grid-sizer">
+                    <div class="grid-sizer--3-col">
 
-                        <div class="grid-item">
+                        <div class="grid-item--3-col">
 
                             <div class="card grayish-bg">
                                 <div class="card-body gray-text">
@@ -178,7 +178,7 @@
 
                         </div>
 
-                        <div class="grid-item">
+                        <div class="grid-item--3-col">
 
                             <div class="card grayish-bg">
                                 <div class="card-body gray-text">
@@ -205,7 +205,7 @@
 
                         </div>
 
-                        <div class="grid-item">
+                        <div class="grid-item--3-col">
 
                             <div class="card grayish-bg">
 
@@ -229,7 +229,7 @@
 
                         </div>
 
-                        <div class="grid-item">
+                        <div class="grid-item--3-col">
 
                             <div class="card grayish-bg">
                                 <img class="card-img-top" data-src="holder.js/100px100?theme=sky" alt="Card image cap">
@@ -257,7 +257,7 @@
 
                         </div>
 
-                        <div class="grid-item">
+                        <div class="grid-item--3-col">
 
                             <div class="card grayish-bg">
                                 <div class="card-body gray-text">
@@ -284,7 +284,7 @@
 
                         </div>
 
-                        <div class="grid-item">
+                        <div class="grid-item--3-col">
 
                             <div class="card grayish-bg">
                                 <img class="card-img-top" data-src="holder.js/100px100?theme=sky" alt="Card image cap">
@@ -307,7 +307,7 @@
                         </div>
 
 {#                        {% for post in docpages %}#}
-{#                            <div class="grid-item">#}
+{#                            <div class="grid-item--3-col">#}
 {#                                {% with post=post.specific %}#}
 {#                                    <h3><a href="{% pageurl post %}">{{ post.title }}</a></h3>#}
 {#                                    <h6>{{ post.date }}</h6>#}
@@ -347,6 +347,17 @@
 
 
     <script type="text/javascript">
-
+        $(function() {
+            // init masonry grid
+            $('.grid').masonry({
+                // set itemSelector so .grid-sizer is not used in layout
+                itemSelector: '.grid-item--3-col',
+                // use element for option
+                columnWidth: '.grid-sizer--3-col',
+                percentPosition: true,
+                horizontalOrder: true,
+                gutter: 20
+            });
+        });
     </script>
 {% endblock %}

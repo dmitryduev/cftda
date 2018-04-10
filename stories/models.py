@@ -26,7 +26,7 @@ class StoriesIndexPage(Page):
         # docpages = self.get_children().live().order_by('first_published_at')
         docpages = StoriesPage.objects.live().order_by('-date')
 
-        paginator = Paginator(docpages, 6)  # Show 9 resources per page
+        paginator = Paginator(docpages, 4)  # Show 9 resources per page
 
         page = request.GET.get('page')
         try:

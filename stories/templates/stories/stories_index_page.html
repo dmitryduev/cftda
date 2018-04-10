@@ -4,6 +4,8 @@
 
 {% block body_class %}template-storiesindexpage{% endblock %}
 
+{% block nav_stories %} active{% endblock %}
+
 {% block content %}
     <div class="container mt-0 pt-1 pb-5 mb-4">
         <div class="row">
@@ -17,17 +19,30 @@
         <div class="row">
 
             {% for post in stories %}
-                <div class="col-6">
+                <div class="col-lg-6 mb-2">
                     {% with post=post.specific %}
                         <h3><a href="{% pageurl post %}" class="a-gray">{{ post.title }}</a></h3>
+                        <h6>{{ post.date }}</h6>
 
-                        {% with post.main_image as main_image %}
-                            {% if main_image %}{% image main_image fill-240x150 %}{% endif %}
-                        {% endwith %}
+                        <div class="row">
+                            <div class="col-12">
 
+                                {% with post.main_image as main_image %}
+                                    {% if main_image %}
+        {#                                <div class="pull-left">#}
+                                            {% image main_image fill-240x150 class="float-left mr-4" %}
+                                        {{ post.intro }}
+        {#                                </div>#}
+                                    {% endif %}
+                                {% endwith %}
 
-                        <p><br>{{ post.intro }}</p>
-                        {{ post.body|richtext }}
+                                <p style="text-align:justify;">{{ post.intro }}</p>
+        {#                        {{ post.body|richtext }}#}
+
+                            </div>
+                        </div>
+
+                        <a href="{% pageurl post %}" class="a-gray float-right">Continue reading <i class="fas fa-arrow-circle-right"></i></a>
 
                         {% if post.tags.all.count %}
                             <div class="tags">
@@ -75,4 +90,21 @@
 
     </div>
 
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(function() {
+            // init masonry grid
+            $('.grid').masonry({
+                // set itemSelector so .grid-sizer is not used in layout
+                itemSelector: '.grid-item--2-col',
+                // use element for option
+                columnWidth: '.grid-sizer--2-col',
+                percentPosition: true,
+                horizontalOrder: true,
+                gutter: 20
+            });
+        });
+    </script>
 {% endblock %}

@@ -120,21 +120,6 @@
 <script type="text/javascript" src="{% static 'js/holder.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/cftda.js' %}"></script>
 
-<script type="text/javascript">
-    $(function() {
-        // init masonry grid
-        $('.grid').masonry({
-            // set itemSelector so .grid-sizer is not used in layout
-            itemSelector: '.grid-item',
-            // use element for option
-            columnWidth: '.grid-sizer',
-            percentPosition: true,
-            horizontalOrder: true,
-            gutter: 20
-        });
-    });
-</script>
-
 {% block extra_js %}
     {# Override this in templates to add extra javascript #}
 {% endblock %}

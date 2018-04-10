@@ -4,6 +4,8 @@
 
 {% block body_class %}template-storiespage{% endblock %}
 
+{% block nav_stories %} active{% endblock %}
+
 {% block content %}
     <div class="container mt-0 pt-1 pb-5 mb-4">
         <div class="row">
@@ -13,7 +15,7 @@
 
                 <div class="intro">{{ page.intro }}</div>
 
-                {{ page.body|richtext }}
+                <p>{{ page.body|richtext }}</p>
 
                 {% for item in page.gallery_images.all %}
                     <div>
@@ -33,7 +35,7 @@
                     </div>
                 {% endif %}
 
-                <p><br><a href="{{ page.get_parent.url }}" class="a-gray">Return to stories</a></p>
+                <p><br><a href="{{ page.get_parent.url }}" class="a-gray">Return to stories <i class="fas fa-arrow-circle-left"></i></a></p>
             </div>
         </div>
     </div>
