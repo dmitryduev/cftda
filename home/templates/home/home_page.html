@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
@@ -52,46 +52,51 @@
     <div class="container-fluid mb-5">
         <div class="main-carousel"
              data-flickity='{ "cellAlign": "left", "contain": true, "wrapAround": true, "autoPlay": 5000, "imagesLoaded": true }'>
-            <div class="carousel-cell">
-                <div class="container">
-                    <div class="row pt-4 mb-2">
-                        <div class="col-lg-4">
-                            <img class="align-self-center mr-3" data-src="holder.js/300x300?theme=sky"
-                             alt="Generic placeholder image">
+            {% for post in page.carousel_stories %}
+                <div class="carousel-cell">
+                    <div class="container">
+
+                        <div class="row pt-4 mb-2">
+                            <div class="col-12">
+
+                                {% with post.main_image as main_image %}
+                                    {% if main_image %}
+                                            {% image main_image fill-400x300 class="float-left mr-4" %}
+{#                                        {{ post.intro }}#}
+                                    {% endif %}
+                                {% endwith %}
+
+                                <h5>
+                                    <a href="{% pageurl post %}" class="a-gray">{{ post.title }}</a>
+                                </h5>
+{#                                <h6>{{ post.date }}</h6>#}
+                                <p style="text-align:justify;">{{ post.intro }}</p>
+{#                                <p style="text-align:justify;">{{ post.body|richtext }}</p>#}
+
+                                <a href="{% pageurl post %}" class="a-gray float-right">Full story <i class="fas fa-arrow-circle-right"></i></a>
+
+                            </div>
                         </div>
-                        <div class="col-lg-8">
-                            <h5 class="mt-0">Center-aligned media</h5>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-                                Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                                Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </p>
-                            <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.
-                                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                            </p>
-                        </div>
+
+{#                        <div class="row pt-4 mb-2">#}
+{#                            <div class="col-lg-6">#}
+{#                                <img class="align-self-center mr-3" data-src="holder.js/400x300?theme=sky"#}
+{#                                 alt="Generic placeholder image">#}
+{#                            </div>#}
+{#                            <div class="col-lg-6">#}
+{#                                <h5 class="mt-0">Center-aligned media</h5>#}
+{#                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.#}
+{#                                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.#}
+{#                                    Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.#}
+{#                                </p>#}
+{#                                <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.#}
+{#                                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.#}
+{#                                </p>#}
+{#                            </div>#}
+{#                        </div>#}
                     </div>
                 </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="container">
-                    <div class="row pt-4 mb-2">
-                        <div class="col-lg-6">
-                            <h5 class="mt-0">Center-aligned media</h5>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-                                Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                                Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </p>
-                            <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.
-                                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                            </p>
-                        </div>
-                        <div class="col-lg-6">
-                            <img class="align-self-center mr-3" data-src="holder.js/400x300?theme=sky"
-                             alt="Generic placeholder image">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
@@ -130,14 +135,26 @@
                     <h3>
                         <a href="#" class="a-blue">Events</a>
                     </h3>
-                    <div class="card bluish-bg">
+                    <div class="card bluish-bg mb-2">
                         <div class="card-body gray-text">
-                            <h5 class="card-title">ZTF Nobel Prize Lecture</h5>
+                            <h5 class="card-title"><a href="#">ZTF Nobel Prize Lecture</a></h5>
+                            <h6>April 1, 2019</h6>
                             <p class="card-text">Zete Eff will be giving the annual Nobel Prize Lecture.
                                 Come, join me on the divan.</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm float-right">Details</a>
+                            <a href="#" class="float-right">Details <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
+
+                    <div class="card bluish-bg mb-2">
+                        <div class="card-body gray-text">
+                            <h5 class="card-title"><a href="#">ZTF Pulitzer Prize Lecture</a></h5>
+                            <h6>April 1, 2018</h6>
+                            <p class="card-text">Zete Eff will also be giving the annual Pulitzer Prize Lecture.
+                                Why the pout?</p>
+                            <a href="#" class="float-right">Details <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <a href="/events" class="a-blue float-right mt-1">More events <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 {#            {{ page.body|richtext }}#}
@@ -149,190 +166,177 @@
         <div class="container pb-5 mb-4">
 {#            <div class="row pt-4 pb-5 mb-4">#}
                 <h3>
-                    <a href="#" class="a-gray">Featured Stories</a>
+                    <a href="{% slugurl 'stories' %}" class="a-gray">Featured Stories</a>
                 </h3>
                 <div class="grid">
                     <!-- width of .grid-sizer used for columnWidth -->
                     <div class="grid-sizer--3-col">
 
-                        <div class="grid-item--3-col">
+                        {% for post in page.featured_stories %}
 
-                            <div class="card grayish-bg">
-                                <div class="card-body gray-text">
-                                    <h5 class="card-title"><a href="#">Story title</a></h5>
-                                    <h6>April 1, 2018</h6>
-                                    <p class="card-text">Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        <div class="tags">
-                                            tags:
-                                            <a href="#">
-                                                <span class="badge badge-primary">story-tag</span>
-                                            </a>
-                                        </div>
-                                    </p>
-                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">
-                                        Continue reading
-                                    </a>
+                            <div class="grid-item--3-col">
+
+                                <div class="card grayish-bg">
+                                    {% with post.main_image as main_image %}
+                                        {% if main_image %}
+                                            {% image main_image original class="card-img-top" style="height:120px; object-fit: cover"%}
+                                        {% endif %}
+                                    {% endwith %}
+                                    <div class="card-body gray-text">
+                                        <h5 class="card-title"><a href="{% pageurl post %}">{{ post.title }}</a></h5>
+                                        <h6>{{ post.date }}</h6>
+                                        <p class="card-text">
+                                            {{ post.intro }}
+                                            {% if post.tags.all.count %}
+                                                <div class="tags">
+                                                    tags:
+                                                    {% for tag in post.tags.all %}
+                                                        <a href="{% slugurl 'stories-tags' %}?tag={{ tag }}">
+                                                            <span class="badge badge-dark">{{ tag }}</span>
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        </p>
+                                        <a href="{% pageurl post %}" class="btn btn-outline-primary btn-sm float-right">
+                                            Continue reading
+                                        </a>
+                                    </div>
                                 </div>
+
                             </div>
 
-                        </div>
+                        {% endfor %}
 
-                        <div class="grid-item--3-col">
 
-                            <div class="card grayish-bg">
-                                <div class="card-body gray-text">
-                                    <h5 class="card-title"><a href="#">Story title</a></h5>
-                                    <h6>April 1, 2018</h6>
-                                    <p class="card-text">Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        <div class="tags">
-                                            tags:
-                                            <a href="#">
-                                                <span class="badge badge-primary">story-tag</span>
-                                            </a>
-                                        </div>
-                                    </p>
-                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">
-                                        Continue reading
-                                    </a>
-                                </div>
-                            </div>
 
-                        </div>
-
-                        <div class="grid-item--3-col">
-
-                            <div class="card grayish-bg">
-
-                                <div class="card-body gray-text">
-                                    <h5 class="card-title"><a href="#">Story title</a></h5>
-                                    <h6>April 1, 2018</h6>
-                                    <p class="card-text">Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        <div class="tags">
-                                            tags:
-                                            <a href="#">
-                                                <span class="badge badge-primary">story-tag</span>
-                                            </a>
-                                        </div>
-                                    </p>
-                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">
-                                        Continue reading
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="grid-item--3-col">
-
-                            <div class="card grayish-bg">
-                                <img class="card-img-top" data-src="holder.js/100px100?theme=sky" alt="Card image cap">
-                                <div class="card-body gray-text">
-                                    <h5 class="card-title"><a href="#">Story title</a></h5>
-                                    <h6>April 1, 2018</h6>
-                                    <p class="card-text">Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        <div class="tags">
-                                            tags:
-                                            <a href="#">
-                                                <span class="badge badge-primary">story-tag</span>
-                                            </a>
-                                        </div>
-                                    </p>
-                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">
-                                        Continue reading
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="grid-item--3-col">
-
-                            <div class="card grayish-bg">
-                                <div class="card-body gray-text">
-                                    <h5 class="card-title"><a href="#">Story title</a></h5>
-                                    <h6>April 1, 2018</h6>
-                                    <p class="card-text">Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        <div class="tags">
-                                            tags:
-                                            <a href="#">
-                                                <span class="badge badge-primary">story-tag</span>
-                                            </a>
-                                        </div>
-                                    </p>
-                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">
-                                        Continue reading
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="grid-item--3-col">
-
-                            <div class="card grayish-bg">
-                                <img class="card-img-top" data-src="holder.js/100px100?theme=sky" alt="Card image cap">
-                                <div class="card-body gray-text">
-                                    <h5 class="card-title"><a href="#">Story title</a></h5>
-                                    <h6>April 1, 2018</h6>
-                                    <p class="card-text">Story intro text. Sic transit gloria mundi.
-                                    Omnia mea mecum porto ad finem saeculorum.
-                                        <div class="tags">
-                                            tags:
-                                            <a href="#">
-                                                <span class="badge badge-primary">story-tag</span>
-                                            </a>
-                                        </div>
-                                    </p>
-                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">Continue reading</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-{#                        {% for post in docpages %}#}
-{#                            <div class="grid-item--3-col">#}
-{#                                {% with post=post.specific %}#}
-{#                                    <h3><a href="{% pageurl post %}">{{ post.title }}</a></h3>#}
-{#                                    <h6>{{ post.date }}</h6>#}
-{#            #}
-{#                                    <div class="media">#}
-{#                                        <div class="media-body">#}
-{#                                            {{ post.intro }}#}
-{#                                            {{ post.body|richtext }}#}
-{#                                            {% if post.tags.all.count %}#}
-{#                                                <div class="tags">#}
-{#                                                    tags:#}
-{#                                                    {% for tag in post.tags.all %}#}
-{#                                                        <a href="{% slugurl 'tags' %}?tag={{ tag }}">#}
-{#                                                            <span class="badge badge-primary">{{ tag }}</span>#}
-{#                                                        </a>#}
-{#                                                    {% endfor %}#}
-{#                                                </div>#}
-{#                                            {% endif %}#}
+{#                        <div class="grid-item--3-col">#}
+{##}
+{#                            <div class="card grayish-bg">#}
+{#                                <div class="card-body gray-text">#}
+{#                                    <h5 class="card-title"><a href="#">Story title</a></h5>#}
+{#                                    <h6>April 1, 2018</h6>#}
+{#                                    <p class="card-text">Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        <div class="tags">#}
+{#                                            tags:#}
+{#                                            <a href="#">#}
+{#                                                <span class="badge badge-primary">story-tag</span>#}
+{#                                            </a>#}
 {#                                        </div>#}
-{#                                    </div>#}
-{#            #}
-                                    {# {{ post.body|richtext }} #}
-{#                                {% endwith %}#}
+{#                                    </p>#}
+{#                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">#}
+{#                                        Continue reading#}
+{#                                    </a>#}
+{#                                </div>#}
 {#                            </div>#}
-{#                        {% endfor %}#}
+{##}
+{#                        </div>#}
+{##}
+{#                        <div class="grid-item--3-col">#}
+{##}
+{#                            <div class="card grayish-bg">#}
+{##}
+{#                                <div class="card-body gray-text">#}
+{#                                    <h5 class="card-title"><a href="#">Story title</a></h5>#}
+{#                                    <h6>April 1, 2018</h6>#}
+{#                                    <p class="card-text">Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        <div class="tags">#}
+{#                                            tags:#}
+{#                                            <a href="#">#}
+{#                                                <span class="badge badge-primary">story-tag</span>#}
+{#                                            </a>#}
+{#                                        </div>#}
+{#                                    </p>#}
+{#                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">#}
+{#                                        Continue reading#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{##}
+{#                        <div class="grid-item--3-col">#}
+{##}
+{#                            <div class="card grayish-bg">#}
+{#                                <img class="card-img-top" data-src="holder.js/100px100?theme=sky" alt="Card image cap">#}
+{#                                <div class="card-body gray-text">#}
+{#                                    <h5 class="card-title"><a href="#">Story title</a></h5>#}
+{#                                    <h6>April 1, 2018</h6>#}
+{#                                    <p class="card-text">Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        <div class="tags">#}
+{#                                            tags:#}
+{#                                            <a href="#">#}
+{#                                                <span class="badge badge-primary">story-tag</span>#}
+{#                                            </a>#}
+{#                                        </div>#}
+{#                                    </p>#}
+{#                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">#}
+{#                                        Continue reading#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{##}
+{#                        <div class="grid-item--3-col">#}
+{##}
+{#                            <div class="card grayish-bg">#}
+{#                                <div class="card-body gray-text">#}
+{#                                    <h5 class="card-title"><a href="#">Story title</a></h5>#}
+{#                                    <h6>April 1, 2018</h6>#}
+{#                                    <p class="card-text">Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        <div class="tags">#}
+{#                                            tags:#}
+{#                                            <a href="#">#}
+{#                                                <span class="badge badge-primary">story-tag</span>#}
+{#                                            </a>#}
+{#                                        </div>#}
+{#                                    </p>#}
+{#                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">#}
+{#                                        Continue reading#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{##}
+{#                        <div class="grid-item--3-col">#}
+{##}
+{#                            <div class="card grayish-bg">#}
+{#                                <img class="card-img-top" data-src="holder.js/100px100?theme=sky" alt="Card image cap">#}
+{#                                <div class="card-body gray-text">#}
+{#                                    <h5 class="card-title"><a href="#">Story title</a></h5>#}
+{#                                    <h6>April 1, 2018</h6>#}
+{#                                    <p class="card-text">Story intro text. Sic transit gloria mundi.#}
+{#                                    Omnia mea mecum porto ad finem saeculorum.#}
+{#                                        <div class="tags">#}
+{#                                            tags:#}
+{#                                            <a href="#">#}
+{#                                                <span class="badge badge-primary">story-tag</span>#}
+{#                                            </a>#}
+{#                                        </div>#}
+{#                                    </p>#}
+{#                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">Continue reading</a>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
 
                     </div>
                 </div>
