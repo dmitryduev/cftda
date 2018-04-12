@@ -1,5 +1,5 @@
 FROM python:3.6
-LABEL maintainer="hello@wagtail.io"
+LABEL maintainer="duev@caltech.edu"
 
 ENV PYTHONUNBUFFERED 1
 ENV DJANGO_ENV dev
@@ -18,4 +18,4 @@ RUN chown -R wagtail /code
 USER wagtail
 
 EXPOSE 8000
-CMD exec gunicorn cftda.wsgi:application --bind 0.0.0.0:8000 --workers 3
+CMD exec gunicorn cftda.wsgi:application --bind 0.0.0.0:8000 --workers 4

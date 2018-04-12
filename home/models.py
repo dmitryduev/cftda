@@ -8,7 +8,7 @@ from stories.models import StoriesPage
 
 
 class HomePage(Page):
-    body = RichTextField(blank=True)
+    mission = RichTextField(blank=True)
 
     def carousel_stories(self):
         # Get list of live stories pages
@@ -31,5 +31,5 @@ class HomePage(Page):
         return [s for s in stories if 'featured' in [c.name for c in s.categories.all()]][:6]
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full"),
+        FieldPanel('mission', classname="full"),
     ]

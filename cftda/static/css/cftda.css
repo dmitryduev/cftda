@@ -108,6 +108,15 @@ body > .container {
     --horizontal-spacing: 20px;
 }
 
+.grid-sizer--1-col {
+    width: 100%;
+}
+
+.grid-item--1-col {
+    width: 100%;
+    margin-bottom: var(--vertical-spacing);
+}
+
 .grid-sizer--2-col {
     /* 1 column by default */
     width: 100%;
@@ -142,13 +151,13 @@ body > .container {
     }
 
     .grid-sizer--3-col {
-        width: calc(33.333% - var(--horizontal-spacing));
+        width: calc(33.333% - 2*var(--horizontal-spacing));
         /*width: calc(50% - var(--horizontal-spacing));*/
         /*width: calc(66.666% - var(--horizontal-spacing));*/
     }
 
     .grid-item--3-col {
-        width: calc(33.333% - var(--horizontal-spacing));
+        width: calc(33.333% - 2*var(--horizontal-spacing));
         /*width: calc(50% - var(--horizontal-spacing));*/
         /*background: rgba(234, 234, 234, 0.26);*/
         /*padding: 1em;*/

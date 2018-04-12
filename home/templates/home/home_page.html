@@ -73,27 +73,12 @@
                                 <p style="text-align:justify;">{{ post.intro }}</p>
 {#                                <p style="text-align:justify;">{{ post.body|richtext }}</p>#}
 
-                                <a href="{% pageurl post %}" class="a-gray float-right">Full story <i class="fas fa-arrow-circle-right"></i></a>
+                                <p><a href="{% pageurl post %}"
+                                      class="a-gray">Full story <i class="fas fa-arrow-circle-right"></i></a></p>
 
                             </div>
                         </div>
 
-{#                        <div class="row pt-4 mb-2">#}
-{#                            <div class="col-lg-6">#}
-{#                                <img class="align-self-center mr-3" data-src="holder.js/400x300?theme=sky"#}
-{#                                 alt="Generic placeholder image">#}
-{#                            </div>#}
-{#                            <div class="col-lg-6">#}
-{#                                <h5 class="mt-0">Center-aligned media</h5>#}
-{#                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.#}
-{#                                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.#}
-{#                                    Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.#}
-{#                                </p>#}
-{#                                <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.#}
-{#                                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.#}
-{#                                </p>#}
-{#                            </div>#}
-{#                        </div>#}
                     </div>
                 </div>
             {% endfor %}
@@ -110,25 +95,7 @@
                     <h3 class="a-blue">
                         Mission BS
                     </h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                    <p>
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                        beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                        sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-                        laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit
-                        qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum
-                        fugiat quo voluptas nulla pariatur?
-                    </p>
+                    {{ page.mission | richtext }}
                 </div>
 
                 <div class="col-lg-4">
@@ -157,7 +124,7 @@
                     <a href="/events" class="a-blue float-right mt-1">More events <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-{#            {{ page.body|richtext }}#}
+
         </div>
     </div>
 
@@ -207,136 +174,6 @@
                             </div>
 
                         {% endfor %}
-
-
-
-{#                        <div class="grid-item--3-col">#}
-{##}
-{#                            <div class="card grayish-bg">#}
-{#                                <div class="card-body gray-text">#}
-{#                                    <h5 class="card-title"><a href="#">Story title</a></h5>#}
-{#                                    <h6>April 1, 2018</h6>#}
-{#                                    <p class="card-text">Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        <div class="tags">#}
-{#                                            tags:#}
-{#                                            <a href="#">#}
-{#                                                <span class="badge badge-primary">story-tag</span>#}
-{#                                            </a>#}
-{#                                        </div>#}
-{#                                    </p>#}
-{#                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">#}
-{#                                        Continue reading#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{##}
-{#                        </div>#}
-{##}
-{#                        <div class="grid-item--3-col">#}
-{##}
-{#                            <div class="card grayish-bg">#}
-{##}
-{#                                <div class="card-body gray-text">#}
-{#                                    <h5 class="card-title"><a href="#">Story title</a></h5>#}
-{#                                    <h6>April 1, 2018</h6>#}
-{#                                    <p class="card-text">Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        <div class="tags">#}
-{#                                            tags:#}
-{#                                            <a href="#">#}
-{#                                                <span class="badge badge-primary">story-tag</span>#}
-{#                                            </a>#}
-{#                                        </div>#}
-{#                                    </p>#}
-{#                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">#}
-{#                                        Continue reading#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{##}
-{#                        </div>#}
-{##}
-{#                        <div class="grid-item--3-col">#}
-{##}
-{#                            <div class="card grayish-bg">#}
-{#                                <img class="card-img-top" data-src="holder.js/100px100?theme=sky" alt="Card image cap">#}
-{#                                <div class="card-body gray-text">#}
-{#                                    <h5 class="card-title"><a href="#">Story title</a></h5>#}
-{#                                    <h6>April 1, 2018</h6>#}
-{#                                    <p class="card-text">Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        <div class="tags">#}
-{#                                            tags:#}
-{#                                            <a href="#">#}
-{#                                                <span class="badge badge-primary">story-tag</span>#}
-{#                                            </a>#}
-{#                                        </div>#}
-{#                                    </p>#}
-{#                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">#}
-{#                                        Continue reading#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{##}
-{#                        </div>#}
-{##}
-{#                        <div class="grid-item--3-col">#}
-{##}
-{#                            <div class="card grayish-bg">#}
-{#                                <div class="card-body gray-text">#}
-{#                                    <h5 class="card-title"><a href="#">Story title</a></h5>#}
-{#                                    <h6>April 1, 2018</h6>#}
-{#                                    <p class="card-text">Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        <div class="tags">#}
-{#                                            tags:#}
-{#                                            <a href="#">#}
-{#                                                <span class="badge badge-primary">story-tag</span>#}
-{#                                            </a>#}
-{#                                        </div>#}
-{#                                    </p>#}
-{#                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">#}
-{#                                        Continue reading#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{##}
-{#                        </div>#}
-{##}
-{#                        <div class="grid-item--3-col">#}
-{##}
-{#                            <div class="card grayish-bg">#}
-{#                                <img class="card-img-top" data-src="holder.js/100px100?theme=sky" alt="Card image cap">#}
-{#                                <div class="card-body gray-text">#}
-{#                                    <h5 class="card-title"><a href="#">Story title</a></h5>#}
-{#                                    <h6>April 1, 2018</h6>#}
-{#                                    <p class="card-text">Story intro text. Sic transit gloria mundi.#}
-{#                                    Omnia mea mecum porto ad finem saeculorum.#}
-{#                                        <div class="tags">#}
-{#                                            tags:#}
-{#                                            <a href="#">#}
-{#                                                <span class="badge badge-primary">story-tag</span>#}
-{#                                            </a>#}
-{#                                        </div>#}
-{#                                    </p>#}
-{#                                    <a href="#" class="btn btn-outline-primary btn-sm float-right">Continue reading</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{##}
-{#                        </div>#}
 
                     </div>
                 </div>
