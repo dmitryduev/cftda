@@ -2,28 +2,48 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% block extra_css %}
+    <style>
+        .rich-text a {
+            color: #f0f0f1 !important;
+            border-bottom: dashed 1px #f0f0f1;
+        }
+        .rich-text a:hover {
+            text-decoration: none;
+            border-bottom: solid 1px #f0f0f1;
+        }
+    </style>
+{% endblock %}
+
 {% block body_class %}template-storiespage{% endblock %}
 
-{% block nav_stories %} active{% endblock %}
+{% block nav_people %} active{% endblock %}
 
 {% block content %}
-    <div class="container mt-0 pt-1 pb-5 mb-4">
+    <div class="container mt-2 pt-1 pb-5 mb-4">
         <div class="row">
-            <div class="col">
-                <h2>{{ page.title }}</h2>
+            <div class="col-lg-4">
+                {% with page.main_image as main_image %}
+                    {% if main_image %}
+                        {% image main_image fill-300x300-c100 class="rounded-circle mb-2" %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="col-lg-8">
+                <h2><span class="badge badge-light">{{ page.title }}</span></h2>
 {#                <p class="meta">{{ page.date }}</p>#}
 
-                <p>{{ page.position }}</p>
-                <p>{{ page.affiliation }}</p>
+                <h5>{{ page.position }}</h5>
+                <h6>{{ page.affiliation }}</h6>
 
                 <p>{{ page.about | richtext }}</p>
 
-                {% for item in page.gallery_images.all %}
-                    <div>
-                        {% image item.image fill-300x300-c100 class="rounded-circle"%}
-                        <p>{{ item.caption }}</p>
-                    </div>
-                {% endfor %}
+{#                {% for item in page.gallery_images.all %}#}
+{#                    <div>#}
+{#                        {% image item.image fill-300x300-c100 class="rounded-circle"%}#}
+{#                        <p>{{ item.caption }}</p>#}
+{#                    </div>#}
+{#                {% endfor %}#}
 
                 {% if page.tags.all.count %}
                     <div class="tags">
@@ -36,7 +56,10 @@
                     </div>
                 {% endif %}
 
-                <p><br><a href="{{ page.get_parent.url }}" class="a-gray">To people <i class="fas fa-arrow-circle-left"></i></a></p>
+            </div>
+            <div class="col">
+                <p><br><a href="{{ page.get_parent.url }}"
+                          class="a-gray">To people <i class="fas fa-arrow-circle-left"></i></a></p>
             </div>
         </div>
     </div>
