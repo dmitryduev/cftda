@@ -18,6 +18,15 @@
     .fc-list-item-time, .fc-list-item-title, .fc-list-heading-alt {
         color: #444444 !important;
     }
+    .fc-today {
+        background-color: #6f9ad8 !important;
+    }
+    .fc-header .fc-title {
+        color: #333333 !important;
+    }
+    {#.fc-content {#}
+    {#    color: #666666 !important;#}
+    }
     </style>
 {% endblock %}
 
@@ -58,7 +67,7 @@
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay,listMonth'
                 },
-                height: 500,
+                height: 550,
                 weekNumbers: true,
                 eventLimit: true, // allow "more" link when too many events
                 events: [
