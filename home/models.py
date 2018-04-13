@@ -5,6 +5,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 
 from stories.models import StoriesPage
+from events.models import EventsPage
 
 
 class HomePage(Page):
@@ -29,6 +30,15 @@ class HomePage(Page):
 
         # return only 6 most recent entries
         return [s for s in stories if 'featured' in [c.name for c in s.categories.all()]][:6]
+
+    def latest_events(self):
+        # Get list of live stories pages
+        events = EventsPage.objects.all()
+
+        # Order by most recent date first
+        events = events.live().order_by('-event_date')
+
+        return events[:2]
 
     content_panels = Page.content_panels + [
         FieldPanel('mission', classname="full"),

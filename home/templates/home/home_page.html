@@ -100,28 +100,21 @@
 
                 <div class="col-lg-4">
                     <h3>
-                        <a href="#" class="a-blue">Events</a>
+                        <a href="{% slugurl 'events' %}" class="a-blue">Events</a>
                     </h3>
-                    <div class="card bluish-bg mb-2">
-                        <div class="card-body gray-text">
-                            <h5 class="card-title"><a href="#">ZTF Nobel Prize Lecture</a></h5>
-                            <h6>April 1, 2019</h6>
-                            <p class="card-text">Zete Eff will be giving the annual Nobel Prize Lecture.
-                                Come, join me on the divan.</p>
-                            <a href="#" class="float-right">Details <i class="fas fa-arrow-circle-right"></i></a>
+                    {% for post in page.latest_events %}
+                        <div class="card bluish-bg mb-2">
+                            <div class="card-body gray-text">
+                                <h5 class="card-title"><a href="{% pageurl post %}">{{ post.title }}</a></h5>
+                                <h6>{{ post.event_date|date }}{% if post.event_date_end != None%} - {{ post.event_date_end|date }}{% endif %}</h6>
+                                <p class="card-text">{{ post.intro }}</p>
+                                <a href="{% pageurl post %}" class="float-right">Details <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
 
-                    <div class="card bluish-bg mb-2">
-                        <div class="card-body gray-text">
-                            <h5 class="card-title"><a href="#">ZTF Pulitzer Prize Lecture</a></h5>
-                            <h6>April 1, 2018</h6>
-                            <p class="card-text">Zete Eff will also be giving the annual Pulitzer Prize Lecture.
-                                Why the pout?</p>
-                            <a href="#" class="float-right">Details <i class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <a href="/events" class="a-blue float-right mt-1">More events <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{% slugurl 'events' %}"
+                       class="a-blue float-right mt-1">More events <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 

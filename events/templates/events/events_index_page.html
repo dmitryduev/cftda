@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css">
+{#    <link rel="stylesheet" type="text/css"#}
+{#          href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css">#}
+    <style>
+    #calendar {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .fc-list-heading-main {
+        color: #333333 !important;
+    }
+    .fc-list-item-time, .fc-list-item-title, .fc-list-heading-alt {
+        color: #444444 !important;
+    }
+    </style>
+{% endblock %}
+
+{% block body_class %}template-storiesindexpage{% endblock %}
+
+{% block nav_events %} active{% endblock %}
+
+{% block content %}
+    <div class="container mt-0 pt-1 pb-5 mb-4">
+        <div class="row">
+            <div class="col">
+                <h2>{{ page.title }}</h2>
+
+                <div class="intro">{{ page.intro|richtext }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div id="calendar"></div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/moment.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+    <script>
+        $(function() {
+
+            $('#calendar').fullCalendar({
+                themeSystem: 'bootstrap4',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listMonth'
+                },
+                height: 500,
+                weekNumbers: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: [
+                    {% for post in events %}
+                        {
+                            title  : '{{ post.title }}',
+                            start  : '{{ post.event_date | date:"Y-m-d H:i" }}',
+                            {% if post.event_date_end != None %}
+                            end    : '{{ post.event_date_end | date:"Y-m-d H:i" }}',
+                            allDay : true, // will make the time disappear
+                            {% else %}
+                            allDay : false, // will make the time show
+                            {% endif %}
+                            url    : '{% pageurl post %}'
+                        },
+                    {% endfor %}
+                ]
+            });
+
+        });
+    </script>
+{% endblock %}
