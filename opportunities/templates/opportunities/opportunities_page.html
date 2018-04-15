@@ -30,7 +30,7 @@
                     <div class="tags">
                         tags:
                         {% for tag in page.tags.all %}
-                            <a href="{% slugurl 'projects-tags' %}?tag={{ tag }}">
+                            <a href="{% slugurl 'opportunities-tags' %}?tag={{ tag }}">
                                 <span class="badge badge-primary">{{ tag }}</span>
                             </a>
                         {% endfor %}

@@ -18,9 +18,11 @@
                 <p>{{ page.body|richtext }}</p>
 
                 {% for item in page.gallery_images.all %}
-                    <div>
-                        {% image item.image fill-400x300 %}
-                        <p>{{ item.caption }}</p>
+                    <div style="display:inline-block; margin-right: 10px">
+                        {% image item.image width-600 as image %}
+                        <a href="{{ image.url }}" data-fancybox="gallery" data-caption="{{ item.caption }}">
+                            {% image item.image fill-240x240 %}
+                        </a>
                     </div>
                 {% endfor %}
 

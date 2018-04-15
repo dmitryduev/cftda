@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-opportunitiesindexpage{% endblock %}
+
+{% block nav_opportunities %} active{% endblock %}
+
+{% block content %}
+    <div class="container mt-0 pt-1 pb-5 mb-4">
+        <div class="row">
+            <div class="col">
+                <h2>{{ page.title }}</h2>
+
+                <div class="intro">{{ page.intro|richtext }}</div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- width of .grid-sizer used for columnWidth -->
+            <div class="grid-sizer--1-col">
+
+                {% for post in opportunities %}
+                    <div class="grid-item--1-col">
+                        <div class="mb-2">
+                            {% with post=post.specific %}
+                                <h3>
+                                    <a href="{% pageurl post %}" class="a-gray">
+                                        <span class="badge badge-primary">{{ post.title }}</span>
+                                    </a>
+                                </h3>
+{#                                <h6>{{ post.date }}</h6>#}
+
+                                <div class="row">
+                                    <div class="col-12">
+
+                                        {% with post.main_image as main_image %}
+                                            {% if main_image %}
+                {#                                <div class="pull-left">#}
+                                                    {% image main_image fill-220x220 class="float-left mr-4" %}
+{#                                                {{ post.intro }}#}
+                {#                                </div>#}
+                                            {% endif %}
+                                        {% endwith %}
+
+                                        <p style="text-align:justify;">{{ post.intro }}</p>
+                                        <p style="text-align:justify;">{{ post.body|richtext }}</p>
+
+                                    </div>
+                                </div>
+
+                                <a href="{% pageurl post %}" class="a-gray float-right">Details <i class="fas fa-arrow-circle-right"></i></a>
+
+                                {% if post.tags.all.count %}
+                                    <div class="tags mt-2">
+                                        tags:
+                                        {% for tag in post.tags.all %}
+                                            <a href="{% slugurl 'opportunities-tags' %}?tag={{ tag }}">
+                                                <span class="badge badge-light">{{ tag }}</span>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                {% empty %}
+                    No opportunities at this time.
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <!--pagination-->
+        {% if opportunities.has_previous or opportunities.has_next %}
+            <div class="row">
+                <div class="col">
+                    <br>
+                    <nav aria-label="Doc navigation">
+                        <ul class="pagination{# justify-content-end#}">
+                            {% if opportunities.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ opportunities.previous_page_number }}"
+                                       tabindex="-1">Previous</a>
+                                </li>
+                            {% endif %}
+                            {% for page_num in opportunities.paginator.page_range %}
+                                <li class="page-item{% if page_num == opportunities.number %} active{% endif %}">
+                                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+                            {% endfor %}
+                            {% if opportunities.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ opportunities.next_page_number }}">Next</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(function() {
+            // init masonry grid
+            $('.grid').masonry({
+                // set itemSelector so .grid-sizer is not used in layout
+                itemSelector: '.grid-item--1-col',
+                // use element for option
+                columnWidth: '.grid-sizer--1-col',
+                percentPosition: true,
+                horizontalOrder: true,
+                gutter: 40
+            });
+        });
+    </script>
+{% endblock %}

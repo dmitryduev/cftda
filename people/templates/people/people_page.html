@@ -39,9 +39,11 @@
                 <p>{{ page.about | richtext }}</p>
 
 {#                {% for item in page.gallery_images.all %}#}
-{#                    <div>#}
-{#                        {% image item.image fill-300x300-c100 class="rounded-circle"%}#}
-{#                        <p>{{ item.caption }}</p>#}
+{#                    <div style="display:inline-block; margin-right: 10px">#}
+{#                        {% image item.image width-600 as image %}#}
+{#                        <a href="{{ image.url }}" data-fancybox="gallery" data-caption="{{ item.caption }}">#}
+{#                            {% image item.image fill-240x240 %}#}
+{#                        </a>#}
 {#                    </div>#}
 {#                {% endfor %}#}
 
@@ -49,7 +51,7 @@
                     <div class="tags">
                         tags:
                         {% for tag in page.tags.all %}
-                            <a href="{% slugurl 'stories-tags' %}?tag={{ tag }}">
+                            <a href="{% slugurl 'people-tags' %}?tag={{ tag }}">
                                 <span class="badge badge-primary">{{ tag }}</span>
                             </a>
                         {% endfor %}
