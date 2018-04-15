@@ -26,7 +26,7 @@ class OpportunitiesIndexPage(Page):
         # docpages = self.get_children().live().order_by('first_published_at')
         docpages = OpportunitiesPage.objects.live().order_by('-date')
 
-        paginator = Paginator(docpages, 4)  # Show 9 resources per page
+        paginator = Paginator(docpages, 10)  # Show N resources per page
 
         page = request.GET.get('page')
         try:
