@@ -10,7 +10,7 @@
     <div class="container mt-0 pt-1 pb-5 mb-4">
         <div class="row">
             <div class="col">
-                <h2>{{ page.title }}</h2>
+                <h2 class="mb-2">{{ page.title }}</h2>
 
                 <div class="intro">{{ page.intro|richtext }}</div>
             </div>
@@ -37,14 +37,14 @@
                                         {% with post.main_image as main_image %}
                                             {% if main_image %}
                 {#                                <div class="pull-left">#}
-                                                    {% image main_image fill-220x220 class="float-left mr-4" %}
+                                                    {% image main_image fill-200x100 class="float-left mr-4" %}
 {#                                                {{ post.intro }}#}
                 {#                                </div>#}
                                             {% endif %}
                                         {% endwith %}
 
                                         <p style="text-align:justify;">{{ post.intro }}</p>
-                                        <p style="text-align:justify;">{{ post.body|richtext }}</p>
+{#                                        <p style="text-align:justify;">{{ post.body|richtext }}</p>#}
 
                                     </div>
                                 </div>
