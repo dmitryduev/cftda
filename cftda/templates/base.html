@@ -22,6 +22,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fancybox.min.css' %}">
 
+    <link rel="icon" type="image/png" href="/media/images/tda-logo-favicon.png">
+
     {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
     {% endblock %}
@@ -33,7 +35,8 @@
 {# navbar #}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="/"><i class="fas fa-rocket"></i> Caltech Center for Time Domain Astronomy</a>
+        <a class="navbar-brand" href="/"><img src="/media/images/tda-logo-sm-wht.png"
+                                              width="30" height="30" class="d-inline-block align-top" alt=""> Caltech Center for Time Domain Astronomy</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbar" aria-controls="navbar"
                 aria-expanded="false" aria-label="Toggle navigation">
