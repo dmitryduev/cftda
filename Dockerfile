@@ -18,7 +18,7 @@ RUN mkdir /cftda-db
 #COPY ./db.sqlite3 /cftda-db/
 RUN mkdir /cftda-media
 
-RUN python manage.py migrate
+#RUN python manage.py migrate
 
 #RUN useradd wagtail
 #RUN chown -R wagtail /code
