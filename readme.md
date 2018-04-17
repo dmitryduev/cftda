@@ -12,7 +12,7 @@ docker volume create cftda-media
 ### build and start the container
 ```bash
 docker build -t cftda-server -f Dockerfile  .
-docker run --rm -d -p 8005:8005 --restart always --name cftda-server -v cftda-db:/cftda-db -v cftda-media:/cftda-media -it cftda-server
+docker run -d -p 8005:8005 --restart always --name cftda-server -v cftda-db:/cftda-db -v cftda-media:/cftda-media -it cftda-server
 # test-start:
 docker run --rm -p 8005:8005 --name cftda-server -v cftda-db:/cftda-db -v cftda-media:/cftda-media -it cftda-server
 ```
